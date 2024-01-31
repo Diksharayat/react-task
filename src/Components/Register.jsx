@@ -133,7 +133,7 @@ const Register = () => {
         </div>
         <div className="form-group">
           State <br/>
-        <button class="btn btn-secondary dropdown-toggle" type="text" data-toggle="dropdown" id="id1" aria-expanded="false">
+        <button className="btn btn-secondary dropdown-toggle" type="text" data-toggle="dropdown" id="id1" aria-expanded="false">
     State
   </button>
   <div className="dropdown-menu" aria-labelledby="id1">
