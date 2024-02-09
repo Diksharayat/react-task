@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { cistyStates } from "../assets/data/cityState.js";
+// import { cistyStates } from "../assets/data/cityState.js";
+import cityState from '../assets/data/cityState.json'
+
 
 
 const Register = () => {
@@ -23,7 +25,7 @@ const hereAboutOptions = [
 ]
    
 
-  let data = cistyStates;
+  let data = cityState;
   const [state, setState] =  useState('');
   const [cities, setCities] = useState([]);
 
@@ -70,8 +72,8 @@ const hereAboutOptions = [
   let uniqueStates = getUniqueStates(data);
   
 
-  var navi = useNavigate();
-  console.log(cistyStates);
+  // var navi = useNavigate();
+  // console.log(cistyStates);
   //form data
   const [formData, setFormData] = useState({
     Role: "",
@@ -112,6 +114,12 @@ const hereAboutOptions = [
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+
+  const onChangeState=(e)=>{
+    getCitiesByState(e.target.value);
+    onChangeInput();
+  }
+
   //onSubmitHandler
 
   const onSubmitHandler = (e) => {
@@ -119,7 +127,7 @@ const hereAboutOptions = [
     if (!Email || !Password || !Role) {
       return alert("Please provide all details");
     } else {
-      navi("/login");
+      // navi("/login");
     }
   };
 
@@ -223,10 +231,12 @@ const hereAboutOptions = [
         </div>
         <div className="form-group">
           State <br />
-          <select className="form-control" onChange={(e) => {getCitiesByState(e.target.value)}} name="CompanyState" value={CompanyState} >
-            {uniqueStates.map((item) => (
-              <option key={item}>{item}</option>
-            ))}
+          <select className="form-control" onChange={(e)=>{onChangeState(e.target.value)}} name="CompanyState" value={CompanyState} >
+          
+             {uniqueStates.map((item) => (
+                
+               <option  key={item} value={item.state_id}>{item}</option>
+             ))}
           </select>
          
         </div>
@@ -234,17 +244,17 @@ const hereAboutOptions = [
           Select city
           <br />
           <select className="form-control" onChange={e => getZipCode(state, e.target.value)} name="CompanyCity" value={CompanyCity}>
-          {cities.map((item1) => (
-               <option key={item1}>{item1}</option>
+       {cities.map((item1,index) => (
+               <option key={index} value={item1.city}>{item1}</option>
             ))}
-          </select>
+       </select>
          
         </div>
 
         <div className="form-group">
           Enter Zip <br />
           <input type="text" value={zip}/>
-        
+   
         </div>
 
         <div className="form-group">

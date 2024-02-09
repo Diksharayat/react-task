@@ -1,4 +1,4 @@
-export const cistyStates =[
+[
   {
       "zip_code": 35004,
       "city": "Moody",
